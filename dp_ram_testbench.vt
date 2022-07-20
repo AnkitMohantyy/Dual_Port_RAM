@@ -1,0 +1,43 @@
+module test_dp_ram;
+  reg clk;
+  reg wr_en_A,wr_en_B; 
+  reg [7:0] data_A,data_B; 
+  reg [5:0] addr_A,addr_B; 
+  wire out_A,out_B;
+  
+  dp_ram DP (clk,data_A,data_B,wr_en_A,wr_en_B,addr_A,addr_B,out_A,out_B);
+  
+  initial
+      clk=1'b0;
+      always #5 clk=~clk;
+      
+      
+  initial
+    begin
+      
+      wr_en_A =1'b1;
+      wr_en_B =1'b1;
+      
+      data_A =8'b11111111;addr_A=6'h01;      
+
+      data_B =8'b00000000;addr_B=6'h02;
+     
+      
+      
+      #20 
+      
+      
+      wr_en_A =1'b0;
+      wr_en_B =1'b0;
+      addr_A=6'h01;    
+      addr_B=6'h02;
+      
+      
+      
+      $monitor($time,"out_A=%b,out_B=%b",out_A,out_B);
+      
+      #10 $finish;
+      
+    end
+endmodule
+      
